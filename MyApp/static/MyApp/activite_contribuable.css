@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+body{
+    background-color:rgb(10, 10, 95);
+    margin: 0px;
+    padding: 0px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Gideon Roman', cursive;/*cette ligne accompagne le @import de la biblitheque google font */
+    font-weight: bold;
+}
+form{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+form div{
+    margin-bottom: 10px;
+}
+input , select{
+    padding: 5px;
+    width :110px
+}
+#period{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+#period {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#period div{
+    margin-right:8px;
+    margin-left: 8px;
+    padding: 5px;
+}
+form button{
+    float: right;
+    border-radius: 5px;
+    margin-right:40%;
+    height: 25px;
+    width: 90px;
+    cursor: pointer;
+}

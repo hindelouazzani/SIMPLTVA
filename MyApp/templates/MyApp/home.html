@@ -1,0 +1,100 @@
+{% block content %}
+{% load static %}
+    <style>
+        * {
+    box-sizing: border-box;
+  }
+  body{
+    background-color: rgb(10, 10, 95);
+    color : white;
+  }
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 500px; /* Should be removed. Only for demonstration */
+  }
+  img{
+    width: 60%;
+    margin: 80px;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.column#col2{
+    background-color: rgb(10, 10, 95);
+    color:rgb(10, 10, 95);
+    font-size: 25px;
+    padding : 15px 80px;
+}
+.column#col2 a{
+    color: white;
+    text-decoration: none;
+}
+.column#col2 ul {
+    margin: 0px;
+    justify-content: center;
+
+}
+h4{
+    margin-top : 0px;
+    margin-buttom : 5px;
+    color : #ffff;
+}
+/**************** nav *************************/
+nav{
+    height: 60px;
+    padding: 10px;
+    margin: 15px;
+    font-size: 20px;
+    color: white;
+
+}
+nav div{
+    float: right;
+}
+nav div a{
+    color: white;
+    text-decoration: none;
+}
+
+    </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<body>
+    <nav>
+        <div><a href="http://127.0.0.1:8000/admin/login/?next=/admin/"><span><i class="fa-duotone fa-user"></i></span>
+           Admin Page<!-- {{username}} --></a></div>
+    </nav>
+    <div class="row">
+      <div class="column" id="col1" >
+        <div>
+            <img src="{% static 'MyApp/Images/Maroc_DGI.jpg' %}" alt="logo">
+        </div>
+      </div>
+      <div class="column"  id="col2">
+          <h4> MENU SIMPL TVA :</h4>
+        <ul>
+            <li>
+                <a href="{% url 'ecart_dd_df'   %}">-Ecart entre déduction facturée et déduction déclarée</a>
+            </li>
+            <br>
+            <li>
+                <a href="{% url 'activite_contribuable'   %}">-Activitées contribuables </a>
+            </li>
+            <br>
+            <li>
+                <a href="{% url 'comparaison_credit'   %}">-Comparaison crédit déclaré vs crédit calculé  </a>
+            </li>
+            <br>
+
+        </ul>
+
+      </div>
+    </div>
+</body>
+{% endblock content %}

@@ -1,0 +1,176 @@
+{% load static %}
+<style>
+ @import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+body{
+    background-color:#ffff;
+    margin : 0px;
+    font-family: 'Gideon Roman', cursive;/*cette ligne accompagne le @import de la biblitheque google font */
+    font-weight: bold;
+}
+nav {
+ background-color:rgb(10, 10, 95);
+ padding : 30px 20px;
+ color : #ffff;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+}
+form{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+form div{
+    margin-bottom: 10px;
+}
+input , select{
+    padding: 5px;
+    width :110px
+}
+#period{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+#period {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#period div{
+    margin-right:8px;
+    margin-left: 8px;
+    padding: 5px;
+}
+form button{
+    float: right;
+    border-radius: 5px;
+    margin-right:40%;
+    height: 25px;
+    width: 90px;
+    cursor: pointer;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 8px;
+}
+
+th {
+  border: 1px solid black;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+nav{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+nav img{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-top : 0px;
+    height : 75px;
+    width : 240px;
+}
+nav span {
+    padding-top: 30px;
+}
+</style>
+<body>
+    <nav>
+    <span id="home "> <a href="http://127.0.0.1:8000/">Home Page</a></span>
+          <img src="{% static 'MyApp/Images/nav_img.jpg' %}" alt="logo">
+        <span id="admin"> <a href="http://127.0.0.1:8000/admin/">Admin Page </a></span>
+</nav>
+    <form name = "form" action = "" method = "POST" >{% csrf_token %}
+        <div name = "client" id="client">
+                    <label for="client_name" > Nom du Client :</label>
+                    <input type="text" name="client_name" id="client_name">
+                    <br><br>
+                    <label for="client_id" > ID du Client :</label>
+                    <input type="text" name="client_id" id="client_id">
+            <br><br>
+            <label for="direction" id ="label1"> Direction :</label>
+            <select name="direction" id="direction">
+                <option value="direction1">direction1</option>
+                <option value="direction2">direction2</option>
+                <option value="direction3">direction3</option>
+                <option value="direction4">direction4</option>
+                <option value="direction5">direction5</option>
+                <option value="direction6">direction6</option>
+                <option value="direction7">direction7</option>
+            </select>
+        </div>
+        <!--- ici c'est pour ajouter la liste des designations avec leurs liens -->
+{%  if submitbutton == "Submit" %}
+        <br><br>
+        <label> ADHERENT : {{client_name}} </label>
+        <br>
+        <h3> Facture des designations :</h3>
+        <table>
+                   <tr>
+                       <th>DESIGNATIONS   </th>
+                       {% for  value  in liste_designation  %}
+                        <td>{{value}}</td>
+                       {% endfor %}
+                   </tr>
+                    <tr>
+                       <th>FACTURES    </th>
+                       {% for  value  in liste_id_designation %}
+                       <td><a href="http://127.0.0.1:8000/admin/MyApp/designation/{{value}}/change/">Facture</a> </td>
+                       {% endfor %}
+                   </tr>
+        </table>
+        <br><br>
+        <!--  la tables des releves de deduction-->
+        <h3>Les releves de deduction appartenant à cet adhérent :  </h3>
+        <table>
+             <tr>
+                <th> Releve de deduction edi </th>
+             </tr>
+
+                {% for value in liste_id_releve %}
+            <tr>
+                 <td>  <a href="http://127.0.0.1:8000/admin/MyApp/releve_deduction_edi/{{value}}/change/"> Releve{{value}}</a></td>
+            </tr>
+                {% endfor %}
+
+        </table>
+        <br>
+
+{% endif %}
+    <input type="submit" name ="submit" value="Submit" class="button">
+    </form>
+</body>

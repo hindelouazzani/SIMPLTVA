@@ -1,0 +1,181 @@
+{% load static %}
+<style>
+body{
+    background-color:#ffff;
+    margin : 0px;
+    font-family: 'Gideon Roman', cursive;/*cette ligne accompagne le @import de la biblitheque google font */
+    font-weight: bold;
+}
+nav {
+ background-color:rgb(10, 10, 95);
+ padding : 30px 20px;
+ color : #ffff;
+ padding-top: 0px;
+ padding-bottom: 0px;
+ margin-top: 0px;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+}
+
+form{
+    background-color: white;
+    margin : 0px ;
+    padding: 60px 95px;
+    border-radius: 10px;
+}
+
+form div{
+    margin-bottom: 10px;
+}
+input , select{
+    padding: 5px;
+    width :110px
+}
+#period{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+#period {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#period div{
+    margin-right:8px;
+    margin-left: 8px;
+    padding: 5px;
+}
+form button{
+    float: right;
+    border-radius: 5px;
+    margin-right:40%;
+    height: 25px;
+    width: 90px;
+    cursor: pointer;
+}
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+nav{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+nav img{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-top : 0px;
+    height : 75px;
+    width : 240px;
+}
+nav span {
+    padding-top: 30px;
+}
+
+</style>
+<body>
+    <nav>
+    <span id="home "> <a href="http://127.0.0.1:8000/">Home Page</a></span>
+          <img src="{% static 'MyApp/Images/nav_img.jpg' %}" alt="logo">
+        <span id="admin"> <a href="http://127.0.0.1:8000/admin/">Admin Page </a></span>
+</nav>
+    <form name = "form" action = "" method = "POST" >{% csrf_token %}
+        <div id="year_form">
+            <label for="year">Année  :</label>
+            <input type="number"  name="year" id="year" min="2000" max="2022" step="1">
+        </div>
+        <div id="period">
+            <label> Période de depot :</label>
+            <div id="from">
+                <label for="start">de </label>
+                <input type="date" id="start" name="start" min="2000-01-02" max="2022-12-31">
+            </div>
+            <div id="to">
+                <label for="end">à </label>
+                <input type="date" id="end" name = "end" min="2000-01-02" max="2022-12-31">
+            </div>
+        </div>
+        <div id="directions">
+            <label for="direction" id ="label1"> Direction :</label>
+            <select name="direction" id="direction">
+                <option value="direction1">direction1</option>
+                <option value="direction2">direction2</option>
+                <option value="direction3">direction3</option>
+                <option value="direction4">direction4</option>
+                <option value="direction5">direction5</option>
+                <option value="direction6">direction6</option>
+                <option value="direction7">direction7</option>
+            </select>
+        </div>
+               {% if submitbutton == "Submit" %}
+
+        <br><label> {{msg}}</label>
+
+                <table>
+                    <tr>
+                        <th> Adhérent </th>
+                        {% for a in adherent1 %}
+                        <td>{{a.NOM_PRENOM_RS}}</td>
+                        {% endfor %}
+                    </tr>
+                   <tr>
+                       <th>Declaration  </th>
+                       {% for  value  in declaration_filtré %}
+                       <td>{{value.ID_DECLARATION}} </td>
+                       {% endfor %}
+                   </tr>
+                   <tr>
+                       <th>Deduction</th>
+                       {% for  value  in deduction %}
+                       <td>{{value}} MAD </td>
+                       {% endfor %}
+                   </tr>
+                   <tr>
+                       <th>Ecart </th>
+                       {% for  value  in ecart %}
+                       <td>{{value}} MAD</td>
+                       {% endfor %}
+                   </tr>
+                   <tr>
+                       <th>Resultat  </th>
+                       {% for value in commentaire_liste %}
+                       <td> {{ value }} </td>
+                       {% endfor %}
+                   </tr>
+                </table>
+          <br>
+               {% endif %}
+
+        <br><br>
+    <input type="submit" name ="submit" value="Submit" class="button">
+    </form>
+</body>
